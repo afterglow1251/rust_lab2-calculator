@@ -1,2 +1,2 @@
-pub mod math;
 pub mod common;
+pub(crate) mod math;
