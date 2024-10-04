@@ -7,6 +7,7 @@ mod constants;
 use crate::utils::common::{evaluate_expression, check_exit_command, choose_mode, mode_to_string};
 use crate::constants::{Mode, MODE_COMMON, MODE_POLISH, EXIT_COMMAND, MEMORY_FLAG};
 
+
 fn main() {
     let mut mode: Option<Mode> = None; // Variable to store mode
     let mut last_result: Option<f64> = None; // Variable to store the last result in memory
