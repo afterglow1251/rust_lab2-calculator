@@ -5,7 +5,7 @@ mod utils;
 mod constants;
 
 use crate::utils::common::{evaluate_expression, check_exit_command, choose_mode, mode_to_string};
-use crate::constants::{Mode, MODE_COMMON, MODE_POLISH, EXIT_COMMAND};
+use crate::constants::{Mode, MODE_COMMON, MODE_POLISH, EXIT_COMMAND, MEMORY_FLAG};
 
 fn main() {
     let mut mode: Option<Mode> = None; // Variable to store mode
@@ -56,10 +56,10 @@ fn main() {
             }
 
             // Handle the case when the "-R" flag is entered to use the last result
-            let expression = if input.contains("-R") {
+            let expression = if input.contains(MEMORY_FLAG) {
                 if let Some(result) = last_result {
                     // Replace "-R" with the last result
-                    input.replace("-R", &result.to_string()) // Use the last result
+                    input.replace(MEMORY_FLAG, &result.to_string()) // Use the last result
                 } else {
                     println!("No result available."); // If there is no result
                     continue;
