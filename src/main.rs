@@ -56,7 +56,7 @@ fn main() {
                 return;
             }
 
-            // Handle the case when the "-R" flag is entered to use the last result
+            // Handle the case when MEMORY_FLAG is entered to use the last result
             let expression = if input.contains(MEMORY_FLAG) {
                 if let Some(result) = last_result {
                     // Replace "-R" with the last result
