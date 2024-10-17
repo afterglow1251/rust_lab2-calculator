@@ -1,6 +1,4 @@
 use std::io;
-mod infix;
-mod polish;
 mod utils;
 mod constants;
 
