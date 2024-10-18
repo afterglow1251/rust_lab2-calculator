@@ -9,12 +9,17 @@ enum Token {
     RightParen,
 }
 
+/// Evaluates an infix mathematical expression and returns the result as a f64.
+/// It tokenizes the input string, converts the tokens to Reverse Polish Notation (RPN),
+/// and then evaluates the RPN expression.
 pub(crate) fn evaluate_infix_expression(expr: &str) -> Result<f64, String> {
     let tokens = tokenize(expr)?;
     let rpn = shunting_yard(tokens)?;
     evaluate_rpn(rpn)
 }
 
+/// Flushes the number buffer into tokens if it's not empty.
+/// Parses the buffered number and adds it as a Token::Number to the tokens vector.
 fn flush_number_buffer(num_buffer: &mut String, tokens: &mut Vec<Token>) -> Result<(), String> {
     if !num_buffer.is_empty() {
         if let Ok(num) = num_buffer.parse::<f64>() {
@@ -27,6 +32,9 @@ fn flush_number_buffer(num_buffer: &mut String, tokens: &mut Vec<Token>) -> Resu
     Ok(())
 }
 
+/// Tokenizes the input expression string into a vector of Token enums.
+/// Handles numbers, operators, and parentheses, and ensures the correct tokenization
+/// based on the rules of mathematical expressions.
 fn tokenize(expr: &str) -> Result<Vec<Token>, String> {
     let mut tokens = Vec::new();
     let mut num_buffer = String::new();
@@ -75,6 +83,9 @@ fn tokenize(expr: &str) -> Result<Vec<Token>, String> {
     Ok(tokens)
 }
 
+
+/// Returns the precedence of the given operator as an unsigned 8-bit integer.
+/// Operators with higher precedence are evaluated first.
 fn precedence(op: char) -> u8 {
     match op {
         '+' | '-' => 1,
@@ -83,6 +94,8 @@ fn precedence(op: char) -> u8 {
     }
 }
 
+/// Converts the vector of tokens from infix notation to Reverse Polish Notation (RPN)
+/// using the Shunting Yard algorithm. Handles operator precedence and parentheses.
 fn shunting_yard(tokens: Vec<Token>) -> Result<Vec<Token>, String> {
     let mut output = Vec::new();
     let mut operators = Vec::new();
@@ -120,6 +133,8 @@ fn shunting_yard(tokens: Vec<Token>) -> Result<Vec<Token>, String> {
     Ok(output)
 }
 
+/// Evaluates the given vector of tokens in Reverse Polish Notation (RPN)
+/// and returns the result as a f64.
 fn evaluate_rpn(tokens: Vec<Token>) -> Result<f64, String> {
     let mut stack = Vec::new();
 
