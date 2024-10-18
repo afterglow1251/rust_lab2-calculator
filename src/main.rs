@@ -1,6 +1,8 @@
 use std::io;
 mod utils;
 mod constants;
+mod infix;
+mod polish;
 
 use crate::utils::common::{evaluate_expression, check_exit_command, choose_mode, mode_to_string};
 use crate::constants::{Mode, MODE_COMMON, MODE_POLISH, EXIT_COMMAND, MEMORY_FLAG};
