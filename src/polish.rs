@@ -8,8 +8,8 @@ pub(crate) fn evaluate_polish_expression(expr: &str) -> Result<f64, String> {
         if let Ok(num) = token.parse::<f64>() {
             stack.push(num);
         } else if "+-*/".contains(*token) {
-            let right = stack.pop().ok_or("Not enough values for the operation".to_string())?;
-            let left = stack.pop().ok_or("Not enough values for the operation".to_string())?;
+            let right = stack.pop().ok_or("Not enough values for the operation")?;
+            let left = stack.pop().ok_or("Not enough values for the operation")?;
             let result = apply_operator(token.chars().next().unwrap(), right, left)?;
             stack.push(result);
         } else {
